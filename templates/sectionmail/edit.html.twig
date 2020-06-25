@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Sectionmail{% endblock %}
+
+{% block body %}
+    <h1>Edit Sectionmail</h1>
+
+    {{ include('sectionmail/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('sectionmail_index') }}">back to list</a>
+
+    {{ include('sectionmail/_delete_form.html.twig') }}
+{% endblock %}

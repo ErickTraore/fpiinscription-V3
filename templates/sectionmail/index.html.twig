@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sectionmail index{% endblock %}
+
+{% block body %}
+    <h1>Sectionmail index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>User1name</th>
+                <th>User2name</th>
+                <th>User3mail</th>
+                <th>Content</th>
+                <th>Sg1name</th>
+                <th>Sg2name</th>
+                <th>Sg3mail</th>
+                <th>Datemail</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sectionmail in sectionmails %}
+            <tr>
+                <td>{{ sectionmail.id }}</td>
+                <td>{{ sectionmail.user1name }}</td>
+                <td>{{ sectionmail.user2name }}</td>
+                <td>{{ sectionmail.user3mail }}</td>
+                <td>{{ sectionmail.content }}</td>
+                <td>{{ sectionmail.sg1name }}</td>
+                <td>{{ sectionmail.sg2name }}</td>
+                <td>{{ sectionmail.sg3mail }}</td>
+                <td>{{ sectionmail.datemail ? sectionmail.datemail|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('sectionmail_show', {'id': sectionmail.id}) }}">show</a>
+                    <a href="{{ path('sectionmail_edit', {'id': sectionmail.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('sectionmail_new') }}">Create new</a>
+{% endblock %}

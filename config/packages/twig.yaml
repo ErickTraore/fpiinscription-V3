@@ -1,0 +1,11 @@
+twig:
+    default_path: '%kernel.project_dir%/templates'
+    paths:
+        # point this wherever your images live
+        '%kernel.project_dir%/public/assets/img': images
+    globals:
+        # partie originale mis à jour:OK
+        pk_test: 'pk_test_yH2L4wvQABMYrMv6xJnzwPDr'
+        sk_live: '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'
+        sk_test: 'sk_test_NAzldBsleRwMMbtOKprXgq3R'
+        pk_live: 'pk_live_518VfvqCka9fpi7fWBGvXrbUI72fmvKwWju9QGFXxfHhvYusOuGP6I1oZ4lgiF23d2uFQkFqvlrYg1Ho54oTvvaXc00hedhXCOl'

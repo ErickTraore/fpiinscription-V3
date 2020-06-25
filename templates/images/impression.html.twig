@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <title>{% block title %} FPI-FRANCE {% endblock %}</title>
+
+  {% block stylesheets %}
+    {# On charge le CSS de bootstrap depuis le site directement #}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/tuto.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('assets/css/stripeElement.css') }}" type="text/css" rel="stylesheet">
+  {% endblock %}
+
+  </head>
+<body>
+ <header class="container" >
+{% block logo %}
+
+			  						<div class="row" id="head-color">
+								  <div class="col-lg-3 col-md-2 col-sm-2 hidden-xs">
+                  	{# <a href="#"><img class=img-responsive src="{{ asset('./assets/img/logofpi.jpg') }}"  alt="logo"></a> #}
+                    <div> <img src="{{ asset('assets/img/logofpi.png') }}" class="img-circle"  alt="logo"></div>
+                  </div>
+								  <div class="col-lg-9 col-md-9 col-sm-9 ">
+									  <h2>FRONT  POPULAIRE  IVOIRIEN</h2>        
+									  <h5>République de Côte d'Ivoire</h5>        
+								  </div>
+						</div>
+{% endblock logo %}
+
+
+{% block body %}
+<h3>FICHE D'ADHESION:{{ user.adhesion.id }} </h3>
+{# {{dump(user)}} #}
+
+ <div class="container">
+ <div class="alert alert-info">
+<h3>1-INFORMATIONS PERSONNELLES </h3>
+
+ <section class="row">
+  <p>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    {% if user.adhesion.gender == true %}
+                        <p>Genre:Masculin</p>
+                        {% elseif user.adhesion.gender == false %}
+                        <p>Genre:Feminin</p>
+                    {% endif %}
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+               Nom: {{ user.adhesion.firstName }}
+                </div>
+                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                   Prenom: {{ user.adhesion.lastName }}
+                 </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <img style="margin:15px" width="120" src='{{ asset('assets/images/' ~ im) }}'>
+                </div>
+    </p>
+ </section>
+
+  <section class="row">
+  <p>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                Lieu Naissance:{{ user.adhesion.lieuNaissance }}
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                Datede naissance: {{ user.adhesion.birthday|date('d-m-Y') }}
+                </div>
+    </p>
+ </section>
+   <section class="row">
+  <p>
+               
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                 Nationnalite: {{ user.adhesion.nationnalite }}
+                </div>
+                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                  Nature Identite: {{ user.adhesion.natureIdentite }}
+                 </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                 N° Piece Identity {{ user.adhesion.numberIdentity }}
+                </div>
+    </p>
+ </section>
+<h3>2-ADRESSE ET CONTACT </h3>
+   <section class="row">
+  <p>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                Pays:{{ user.adhesion.pays }}
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                 Ville ou Village: {{'#' }}
+                </div>
+                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                 Commune: {{'#' }}
+                 </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                </div>
+    </p>
+ </section>
+    <section class="row">
+  <p>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                N°:{{ user.adhesion.novoie }}
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                 Voie: {{ user.adhesion.voie }}
+                </div>
+                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                Nom de la voie: {{ user.adhesion.nomvoie }}
+                 </div>
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                 Code Postale: {{ user.adhesion.codepostale }}
+
+                </div>
+    </p>
+ </section>
+ <section class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                  N° Téléphone mobile: {{ user.username }}
+                </div>
+
+   </section>
+   <section class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  Email: {{ user.adhesion.email }}
+                </div>
+   </section>
+<h3>3-STATUT </h3>
+ <section class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  Profession: {{ user.adhesion.profession }}
+                </div>
+   </section>
+   <section class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  Federation/Section/Base: {{ user.adhesion.statut }}
+                </div>
+   </section>
+ <ul>
+
+<caption class="well well-sm"><h3> Reservé à l'administration</h3></caption>
+
+    <table>
+            <tr>
+                <th class="well">DEMANDEUR DE CARTE </th>
+                <th class="well">Représentant du Parti </th>
+                <th class="well">Date d'inscription </th>
+                <th class="well">Signature électronique </th>
+            </tr>
+            <tr>
+                <td class="well well"><p>{{ user.adhesion.firstName }} {{'-'}} {{ user.adhesion.lastName }}</p></td>
+                <td class="well well">{{'Georgette Nekallo'}}</td>
+                <td class="well well">{{ user.adhesion.dateadhesion|date('d-m-Y')  }}</td>
+                <td class="well well">{{ user.dateSignat|date('d-m-Y')  }}</td>
+            </tr>
+    </table> 
+    </ul>
+</div>
+</div>
+    </div>       
+        
+{% endblock %} 

@@ -1,0 +1,42 @@
+{# templates/layout.html.twig #}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <title>{% block title %} FPI-FRANCE {% endblock %}</title>
+
+  {% block stylesheets %}
+    {# On charge le CSS de bootstrap depuis le site directement #}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/tuto.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('assets/css/stripeElement.css') }}" type="text/css" rel="stylesheet">
+  {% endblock %}
+
+  </head>
+<body>
+{% block logo %}
+ <header class="container" >
+			  						<div class="row" id="head-color">
+								  <div class="col-lg-3 col-md-2 col-sm-2 hidden-xs">
+                    <div> <img src="{{ asset('assets/img/logofpi.png') }}" class="img-circle"  alt="logo"></div>
+                  </div>
+								  <div class="col-lg-9 col-md-9 col-sm-9 ">
+									  <h1>FRONT  POPULAIRE  IVOIRIEN</h1>        
+									  <h2>République de Côte d'Ivoire</h2>        
+								  </div>
+						</header>
+{% endblock logo %}
+
+    {% block pub %} 
+  
+    {% endblock %}  
+         
+    {% block gauche %}{% endblock %}
+        
+    {% block body %}{% endblock %}
+
+    {% block droite %} {% endblock %}

@@ -1,0 +1,20 @@
+
+{% block title %}Mail-SG-FPI{% endblock %}
+
+{% block body %}
+
+<div> <img src="{{ email.image('@images/logofpi.png') }}" class="img-circle"  alt="logo"></div>
+
+<h4> Vous avez reçu un message du site fpiinscription.com</h4>
+<p><h4>Expéditeur:{% if  sectionmail.genre == true %}
+Monsieur
+{% endif %}
+{% if  sectionmail.genre == false %}
+Madame
+{% endif %}
+{{ sectionmail.user1name }} {{ sectionmail.user2name }} {{ sectionmail.user3mail }}</h4></p>
+<p> MESSAGE: Expédié le {{ sectionmail.datemail  ? sectionmail.datemail |date('d-m-Y H:i:s') : '' }}<p>
+{{ sectionmail.content }}
+
+
+{% endblock %} 

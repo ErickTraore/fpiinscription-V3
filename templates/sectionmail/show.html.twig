@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sectionmail{% endblock %}
+
+{% block body %}
+    <h1>Sectionmail</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ sectionmail.id }}</td>
+            </tr>
+            <tr>
+                <th>User1name</th>
+                <td>{{ sectionmail.user1name }}</td>
+            </tr>
+            <tr>
+                <th>User2name</th>
+                <td>{{ sectionmail.user2name }}</td>
+            </tr>
+            <tr>
+                <th>User3mail</th>
+                <td>{{ sectionmail.user3mail }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ sectionmail.content }}</td>
+            </tr>
+            <tr>
+                <th>Sg1name</th>
+                <td>{{ sectionmail.sg1name }}</td>
+            </tr>
+            <tr>
+                <th>Sg2name</th>
+                <td>{{ sectionmail.sg2name }}</td>
+            </tr>
+            <tr>
+                <th>Sg3mail</th>
+                <td>{{ sectionmail.sg3mail }}</td>
+            </tr>
+            <tr>
+                <th>Datemail</th>
+                <td>{{ sectionmail.datemail ? sectionmail.datemail|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('sectionmail_index') }}">back to list</a>
+
+    <a href="{{ path('sectionmail_edit', {'id': sectionmail.id}) }}">edit</a>
+
+    {{ include('sectionmail/_delete_form.html.twig') }}
+{% endblock %}

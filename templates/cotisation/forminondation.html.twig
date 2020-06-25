@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Adhesion{% endblock %}
+
+{% block body %}
+<div class="container my-class">
+<form action="" method="POST">
+<p><h3>Opération inondation: Je fais un don</h3></p>
+{# <label> Nombre de mois</label> #}
+<label> Je donne la somme de:</label>
+<select name="amountun">
+    <option value="">--Please choisir une option--</option>
+    <option value="100">un euros = 1€</option>
+    <option value="500">Cinq euros = 5€</option>
+    <option value="1000">Dix euros = 10€</option>
+    <option value="1500">Quinze euros = 15€</option>
+    <option value="2000">Vingt euros = 20€</option>
+    <option value="3000">Trente euros = 30€</option>
+    <option value="4000">Quarante euros = 40€</option>
+    <option value="5000">Cinquante euros = 50€</option>
+    <option value="6000">Soixante euros = 60€</option>
+    <option value="7500">Soixante quinze euros = 75€</option>
+    <option value="10000">cent = 100€</option>
+    <option value="20000">Deux-cent = 200€</option>
+    <option value="30000">Trois-cent = 300€</option>
+    <option value="40000">Quatre-cent =  400€</option>
+    <option value="50000">Cinq-cent euros = 500€</option>
+</select> 
+</div>
+
+<button class="label label-success" type="submit">Envoyer</button>
+{# <a href="{{ path('home') }}"><p><h4><span class="label label-success">Retour</span></h4></p></a> #}
+
+</form>
+{% endblock %}

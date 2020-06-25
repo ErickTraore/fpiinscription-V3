@@ -1,0 +1,104 @@
+{# templates/menu-accordeon.html.twig #}
+<ul id="menu-accordeon">
+   <li><a href="#">REPRESENTATION</a>
+            <ul>
+               <li><a href="#">Bureau</a></li>
+            </ul>
+   </li>
+   <li><a href="#">Sections ARA</a>
+            <ul>
+               <li><a href="{{ path('sectionmail_mailsg') }}">Section 1 Lyon</a></li>
+               <li><a href="#">Section 2 Lyon</a></li>
+               <li><a href="#">Section 3 Grenoble</a></li>
+            </ul>
+   </li>
+   <li><a href="#">Etre sympathisant</a>
+   <li><a href="#">FPI Innondation</a>
+            <ul>
+               <li><a href="{{ path('cotisation_inondation') }}">Dons électoraux</a></li>
+            </ul>
+   <li><a href="#">Don sympathisant</a>
+            <ul>
+               <li><a href="{{ path('cotisation_formdon') }}">Dons</a></li>
+            </ul>
+   </li>
+   <li><a href="#">Devenir Adhérent</a>
+      <ul>
+         <li><a href="{{ path('adhesion_new') }}">Formulaire d'adhésion</a></li>
+      </ul>   
+         {% if is_granted ('ROLE_ADHERENT') %}
+      <ul>
+         <li><a href="{{ path('adhesion_edituser') }}">Mon profil</a></li>
+         <li><a href="{{ path('adhesion_newUpload') }}">Demande de carte</a></li>
+         <li><a href="{{ path('adhesion_viewUpload') }}">Voir ma photo </a></li>
+         <li><a href="{{ path('signature') }}">Signature electronique</a></li>
+         <li><a href="{{ path('adhesion_impression') }}">Impression</a></li>
+      
+      </ul>
+   </li>
+      <li><a href="#">Documents FPI</a>
+      <ul>
+         <li><a href="{{ path('product_index') }}">Textes statutaires</a></li>
+      </ul>
+   </li>
+	<li><a href="#">Cotisations</a>
+      <ul>
+         <li><a href="{{ path('cotisation_formCarte') }}">Paiement Carte Adhesion</a></li>
+         <li><a href="{{ path('cotisation_formPaiement') }}">Mensuelle/annuel</a></li>
+         <li><a href="{{ path('cotisation_formdon') }}">Dons</a></li>
+         <li><a href="{{ path('count_attestation') }}">Attestation de paiement</a></li>
+      </ul>
+   </li>
+         {% endif %}
+{% if is_granted ('ROLE_MANAGER_LYON') %}
+   <li><a href="#">Tableau Lyon</a>  
+      <ul>
+         {# "{{ path('count_makeCarte') }}" #}
+         <li><a href="{{ path('tablelyon_new') }}">Enregistrement</a></li>
+         <li><a href="{{ path('tablelyon_index') }}">Liste-Section-Lyon-I</a></li>
+         <li><a href="{{ path('tablelyon_bureau') }}">Liste-Bureau</a></li>
+      </ul>
+   </li>
+{% endif %}
+{% if is_granted ('ROLE_ADMIN') %}
+
+   <li><a href="#">Tableau Admin</a>  
+      <ul>
+         <li><a href="{{ path('admin_listetotal') }}">Liste-Total</a></li>
+         <li><a href="{{ path('admin_listeadherent') }}">Liste-Adherents</a></li>
+         <li><a href="{{ path('admin_listeadmin') }}">Liste-Administrateurs</a></li>
+         <li><a href="{{ path('admin_listesuperadmin') }}">Liste-Super_Admin</a></li>
+         <li><a href="{{ path('admin_paiementadherent') }}">Paiements adhesions</a></li>
+         <li><a href="{{ path('admin_paiementdon') }}">Paiements dons</a></li>
+         <li><a href="{{ path('admin_paiementvente') }}">Paiements ventes</a></li>{# <li><a href="{{ path('envoiesms_general') }}">Communications</a></li> #}
+      </ul>
+   </li>
+{% endif %}
+
+{% if is_granted ('ROLE_TECHNIQUE') %}
+     <li><a href="#">Tableau Technique</a>  
+      <ul>
+         <li><a href="{{ path('admin_commandecarte') }}">Liste-Cde-carte</a></li>
+      </ul>
+   </li>
+{% endif %}
+
+   <li><a href="#">Mot de Pass</a>
+      <ul>
+         <li><a href="{{ path('mdpupdate') }}">Remplacez</a></li>
+      </ul>
+   </li>
+{% if is_granted ('ROLE_SUPER_ADMIN') %}
+   <li><a href="#">Super-Admin</a>  
+      <ul>
+      
+      {# {{ path('admin_majroles') }} #}
+         <li><a href="{{ path('rolemodifun') }}">Modif roles</a></li>
+         <li><a href="{{ path('product_new') }}">Insertion Document</a></li>
+         <li><a href="{{ path('envoiesms_lwssmssignature') }}">Test SMS LWS</a></li>
+         <li><a href="{{ path('envoiesms_smspartnersignature') }}">Test smspartner</a></li>
+      </ul>
+   </li>
+{% endif %}
+ 
+</ul>
