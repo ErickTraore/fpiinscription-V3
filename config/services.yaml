@@ -7,7 +7,7 @@ parameters:
     sgId: 8250
     fpiMail: 'fpiinscription@gmail.com'
     brochures_directory: '../public/assets/brochures'
-    sk_live: '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'
+    sk_live: ''
 
 
 services:
