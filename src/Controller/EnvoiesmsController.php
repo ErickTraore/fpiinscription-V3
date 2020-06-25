@@ -32,7 +32,7 @@ class EnvoiesmsController extends AbstractController
         if (isset($message_phone) && isset($number_phone)) {
             $gateway_url = "https://sms.lws.fr/sms/api";
             $action = "send-sms";
-            $apiKey  = "ZGFvdWRhOiQyeSQxMCRneVdNTWhZT3dpYTdhb0NNLlI2blAuSkRMY2ZNSmRsbGZ4OS5yUHdGU1NOaC52Mk9OcURhUw==";
+            $apiKey  = $this->getParameter('apikey');
             $to =$number_phone/1;
             $senderID  = "FPI_GBAGBO";
             $message  = urlencode($message_phone);
