@@ -25,7 +25,7 @@ class Adhesion
    /**
     * @ORM\Column(type="boolean")
     */
-    private $gender = 0;
+    private $gender;
 
     /**
       * @ORM\Column(type="string", length=255, nullable=true)
@@ -133,6 +133,7 @@ class Adhesion
     {
         $this->dateadhesion = new \Datetime();
         $this->dateecheancebis = new \Datetime();
+        $this->gender = true;
     }
 
     public function getId(): ?int

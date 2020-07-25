@@ -5,13 +5,7 @@
                <li><a href="#">Bureau</a></li>
             </ul>
    </li>
-   <li><a href="#">Sections ARA</a>
-            <ul>
-               <li><a href="{{ path('sectionmail_mailsg') }}">Section 1 Lyon</a></li>
-               <li><a href="#">Section 2 Lyon</a></li>
-               <li><a href="#">Section 3 Grenoble</a></li>
-            </ul>
-   </li>
+
    <li><a href="#">Etre sympathisant</a>
    <li><a href="#">FPI Innondation</a>
             <ul>
@@ -35,6 +29,13 @@
          <li><a href="{{ path('adhesion_impression') }}">Impression</a></li>
       
       </ul>
+         <li><a href="#">Sections ARA</a>
+            <ul>
+               <li><a href="{{ path('sectionmail_selectsgLyon1') }}">Section 1 Lyon</a></li>
+               <li><a href="{{ path('sectionmail_selectsgLyon2') }}">Section 2 Lyon</a></li>
+               {# <li><a href="{{ path('sectionmail_selectsg') }}">Section 3 Grenoble</a></li> #}
+            </ul>
+         </li>
    </li>
       <li><a href="#">Documents FPI</a>
       <ul>
@@ -53,7 +54,6 @@
 {% if is_granted ('ROLE_MANAGER_LYON') %}
    <li><a href="#">Tableau Lyon</a>  
       <ul>
-         {# "{{ path('count_makeCarte') }}" #}
          <li><a href="{{ path('tablelyon_new') }}">Enregistrement</a></li>
          <li><a href="{{ path('tablelyon_index') }}">Liste-Section-Lyon-I</a></li>
          <li><a href="{{ path('tablelyon_bureau') }}">Liste-Bureau</a></li>

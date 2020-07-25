@@ -6,10 +6,10 @@
 <div> <img src="{{ email.image('@images/logofpi.png') }}" class="img-circle"  alt="logo"></div>
 
 <h4> Vous avez reçu un message du site fpiinscription.com</h4>
-<p><h4>Expéditeur:{% if  sectionmail.genre == true %}
+<p><h4>Expéditeur:{% if  sectionmail.gender == true %}
 Monsieur
 {% endif %}
-{% if  sectionmail.genre == false %}
+{% if  sectionmail.gender == false %}
 Madame
 {% endif %}
 {{ sectionmail.user1name }} {{ sectionmail.user2name }} {{ sectionmail.user3mail }}</h4></p>

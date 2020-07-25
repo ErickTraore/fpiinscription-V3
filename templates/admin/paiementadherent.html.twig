@@ -12,7 +12,7 @@
 
 <caption class="well well-sm"><h3> Liste des Adhérents ayant payé un abonnement.</h3></caption>
     <table>
-    {% if counts %}
+    {% if listusers %}
             <tr>
                 <th class="well">id:</th>
                 <th class="well">Sex:</th>
@@ -23,14 +23,8 @@
                 <th class="well">Naissance </th>
                 <th class="well">lieu naiss </th>
                 <th class="well">Profession </th>
-                <th class="well">voie </th>
-                <th class="well">N° voie </th>
-                <th class="well">Nom voie </th>
-                <th class="well">Nom ville </th>
-                <th class="well">Nom pays </th>
-                <th class="well">code postale </th>
-                <th class="well">Photo </th>
-            </tr>
+                <th class="well">Ref:</th>
+                </tr>
          {% for user in listusers  %}
          <tr> 
                 <td class="well well-sm">{{ user.id | default("") }}</td>
@@ -42,14 +36,8 @@
                 <td class="well well-sm">{{ user.adhesion.birthday | default("") | date('d-m-Y')  }}</td>
                 <td class="well well-sm">{{ user.adhesion.lieunaissance  | default("") }}</td>
                 <td class="well well-sm">{{ user.adhesion.profession  | default("") }}</td>
-                <td class="well well-sm">{{ user.adhesion.voie  | default("") }}</td>
-                <td class="well well-sm">{{ user.adhesion.novoie  | default("") }}</td>
-                <td class="well well-sm">{{ user.adhesion.nomvoie  | default("") }}</td>
-                <td class="well well-sm">{{ user.adhesion.ville  | default("") }}</td>
-                <td class="well well-sm">{{ user.adhesion.pays  | default("") }}</td>
-                <td class="well well-sm">{{ user.adhesion.codepostale  | default("") }}</td>
-                <td> <img style="margin:15px" width="120" src='{{ asset('assets/images/' ~ user.adhesion.image | default("")) }}'></td>
-         </tr>
+                <td class="well well-sm">{{ user.count.ref  | default("") }}</td>
+                    </tr>
          {% endfor %}
     {% else %}
    Aucun Abonnement d'adherents.

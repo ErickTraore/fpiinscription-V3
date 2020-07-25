@@ -4,12 +4,13 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    sgId: 8250
+    sgIdLyon1: 8250
+    sgIdLyon2: 8251
     fpiMail: 'fpiinscription@gmail.com'
+    image_directory: '../public/assets/images'
     brochures_directory: '../public/assets/brochures'
-    sk_live: ''
-    apiKey: ''
-
+    sk_live: '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'
+    apiKey: 'ZGFvdWRhOiQyeSQxMCRneVdNTWhZT3dpYTdhb0NNLlI2blAuSkRMY2ZNSmRsbGZ4OS5yUHdGU1NOaC52Mk9OcURhUw=='
 
 services:
     # default configuration for services in *this* file

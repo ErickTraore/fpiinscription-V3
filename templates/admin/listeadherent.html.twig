@@ -28,7 +28,9 @@
                 <th class="well">Nom ville </th>
                 <th class="well">Nom pays </th>
                 <th class="well">code postale </th>
+                <th class="well">Date-adhesion </th>
                 <th class="well">Photo </th>
+
             </tr>
          <tr>
     {% if listusers %}
@@ -50,6 +52,8 @@
                 <td class="well well-sm">{{ user.adhesion.ville  | default("") }}</td>
                 <td class="well well-sm">{{ user.adhesion.pays  | default("") }}</td>
                 <td class="well well-sm">{{ user.adhesion.codepostale  | default("") }}</td>
+                <td class="well well-sm">{{ user.adhesion.dateadhesion | default("") | date('d-m-Y')  }}</td>
+
                 <td> <img style="margin:15px" width="120" src='{{ asset('assets/images/' ~ user.adhesion.image | default("")) }}'></td>
          </tr>
          {% else %}

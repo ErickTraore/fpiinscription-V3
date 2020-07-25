@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Controller\EnvoiesmsController;
 use App\Entity\SMSPartnerAPI;
 use App\Entity\User;
 use App\Repository\UserRepository;
@@ -10,6 +11,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Debug\DebugClassLoader;
+use Symfony\Component\DependencyInjection\Argument\ServiceLocator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,8 +34,9 @@ class EnvoiesmsController extends AbstractController
         if (isset($message_phone) && isset($number_phone)) {
             $gateway_url = "https://sms.lws.fr/sms/api";
             $action = "send-sms";
-            $apiKey  = $this->getParameter('apikey');
-            $to =$number_phone/1;
+            // $apiKey=$this->container->getParameter('apikey');
+            $apiKey='ZGFvdWRhOiQyeSQxMCRneVdNTWhZT3dpYTdhb0NNLlI2blAuSkRMY2ZNSmRsbGZ4OS5yUHdGU1NOaC52Mk9OcURhUw==';
+            $to=$number_phone/1;
             $senderID  = "FPI_GBAGBO";
             $message  = urlencode($message_phone);
             // Prepare le tableau de données pour la requête API

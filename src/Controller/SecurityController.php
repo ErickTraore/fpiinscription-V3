@@ -1,9 +1,11 @@
 <?php
 namespace App\Controller;
 
+use App\Controller\EnvoiesmsController;
 use App\Controller\SecurityController;
 use App\Entity\Adhesion;
 use App\Entity\User;
+use Symfony\Component\DependencyInjection\Argument\ServiceLocator;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use App\Security\StubAuthenticator;
@@ -128,7 +130,7 @@ class SecurityController extends AbstractController
                 $message_inscription = " Bravo, vous etes maintenant inscrit au FPI sous le statut de SYMPATHISANT,ref: FPI-INS" . $datanum ." La direction du FPI vous remercie de votre confiance. ";
                 //vérouillage ou dévérouillage des envois sms grace à $insertisok
                 // $smsok = false;
-                $smsok = false;
+                $smsok = true;
                 if ($smsok) {
                     return $this->redirectToRoute('envoiesms_sympathisant', [
                     'number_phone'  => $user->getUsername(),

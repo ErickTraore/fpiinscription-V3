@@ -62,7 +62,7 @@ class Sectionmail
     /**
      * @ORM\Column(type="boolean")
      */
-    private $genre;
+    private $gender;
 
     public function getId(): ?int
     {
@@ -170,14 +170,14 @@ class Sectionmail
         return $this;
     }
 
-    public function getGenre(): ?bool
+    public function getGender(): ?bool
     {
-        return $this->genre;
+        return $this->gender;
     }
 
-    public function setGenre(bool $genre): self
+    public function setGender(bool $gender): self
     {
-        $this->genre = $genre;
+        $this->gender = $gender;
 
         return $this;
     }

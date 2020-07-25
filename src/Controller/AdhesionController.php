@@ -37,21 +37,21 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class AdhesionController extends AbstractController
 {
-    // /**
-    //  * @var AdhesionRepository
-    //  */
-    // private $repository;
+    /**
+     * @var AdhesionRepository
+     */
+    private $repository;
     
-    // /** 
-    //  * @var EntityManagerInterface $em 
-    // */
-    // private $em;
+    /** 
+     * @var EntityManagerInterface $em 
+    */
+    private $em;
     
-    // public function __construct(AdhesionRepository $repository, EntityManagerInterface $em)
-    // {
-    //     $this->repository = $repository;
-    //     $this->em = $em;
-    // }
+    public function __construct(AdhesionRepository $repository, EntityManagerInterface $em)
+    {
+        $this->repository = $repository;
+        $this->em = $em;
+    }
     
     /**
      * @Route("/", name="adhesion_index", methods={"GET"})
@@ -83,7 +83,9 @@ class AdhesionController extends AbstractController
         $form = $this->createForm(AdhesionType::class, $adhesion);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() 
+        // && $form->isValid()
+        ) {
             if ($form->get('Annuler')->isClicked()) {
                 return $this->redirectToRoute('home');
             }

@@ -58,14 +58,15 @@ class AdminController extends AbstractController
     {
         $users = $userRepository->findAll();
         $adhesions = $adhesionRepository->findAll();
-        $listusers[]='';
+        // $listusers[]='';
         
-        foreach ($users as $user) {
-            $adhesion = $user->getAdhesion();
-            $listusers[]=$user;
-        }
+        // foreach ($users as $user) {
+        //     $adhesion = $user->getAdhesion();
+        //     $listusers[]=$user;
+        
+        // }
         return $this->render('admin/listetotal.html.twig', [
-                'users' => $listusers
+                'users' => $users
                 ]);
     }
         
@@ -74,7 +75,7 @@ class AdminController extends AbstractController
      */
     public function listeadherent(AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $mageRepository):Response
     {
-        $user = new User();
+        // $user = new User();
         $users = $userRepository->findAll();
         $adhesions = $adhesionRepository->findAll();
         // $listusers[]='';
@@ -86,7 +87,7 @@ class AdminController extends AbstractController
         return $this->render('admin/listeadherent.html.twig', [
             // 'listusers' => $listusers,
             'listusers' => $users,
-                'adhesions' => $adhesions
+                // 'adhesions' => $adhesions
                 ]);
     }
 
@@ -136,22 +137,40 @@ class AdminController extends AbstractController
     /**
      * @Route("/paiementadherent", name="admin_paiementadherent")
      */
-    public function paiementadherent(CountRepository $countRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $mageRepository):Response
+    public function paiementadherent(CountRepository $countRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository):Response
     {
+        $users = $userRepository->findAll();
         $counts = $countRepository->findBy([
             'ref' => 'abonnement'
         ]);
         $listusers[]='';
 
         foreach ($counts as $count) {
+            
             $adhesion = $count->getAdhesion();
             $adhesionid = $adhesion->getId();
-            $image = $adhesion->getImage();
+            $user = $userRepository->findOneBy(['adhesion' => $adhesionid]);
+            $adhesion = $user->getAdhesion();
             $listusers[]=$userRepository->findOneBy(['adhesion' => $adhesionid]);
-        }
+            $listcounts[]=$countRepository->findOneBy(['adhesion' => $adhesionid]);
+         }
+
+        
+           
+            // $counts = $countRepository->findAll();
+            // $users = $userRepository->findAll();
+            // $adhesions = $adhesionRepository->findAll();
+
+            dump($listusers);
+            dump($listcounts);
+
+
+        
         return $this->render('admin/paiementadherent.html.twig', [
                 'listusers' => $listusers,
-                'counts' => $counts
+                // 'counts' => $counts,
+                // 'users' =>$users,
+                // 'adhesions' =>$adhesions,
                 ]);
     }
 

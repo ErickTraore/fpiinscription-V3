@@ -3,9 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Sectionmail;
+
 use App\Form\SectionmailType;
 use App\Repository\SectionmailRepository;
 use App\Repository\UserRepository;
+use App\Service\Gomailsg;
+use App\Service\TakeSg;
+use App\Service\VerifTexte;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -30,19 +35,65 @@ class SectionmailController extends AbstractController
             'sectionmails' => $sectionmailRepository->findAll(),
         ]);
     }
+    
+/**
+ * @Route("/testService", name="sectionmail_testService", methods={"GET"})
+ */
+public function testService(VerifTexte $verifTexte){
+    $note='Je suis un divin Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l\'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n\'a pas fait que survivre cinq siècles, mais s\'est aussi adapté à la bureautique informatique, sans que son contenu n\'e';
+    $reception = $verifTexte->isSpam($note);
+    if(!$reception)
+        {
+        return $this->render('veriftexte/indexno.html.twig');
+        }
+    else{
+        return $this->render('veriftexte/indexyes.html.twig');
+        }
+    }
 
-            /**
-     * @Route("/mailsg", name="sectionmail_mailsg", methods={"GET","POST"})
+/**
+ * @Route("/selectsgLyon1", name="sectionmail_selectsgLyon1", methods={"GET","POST"})
+ */
+public function selectsgLyon1(TakeSg $takeSg, Request $request,UserRepository $userRepository, MailerInterface $mailer): Response
+{
+        return $this->redirectToRoute('sectionmail_pushSg',[
+              'reception' => 'sgIdLyon1'
+        ]); 
+}
+
+/**
+ * @Route("/selectsgLyon2", name="sectionmail_selectsgLyon2", methods={"GET","POST"})
+ */
+public function selectsgLyon2(TakeSg $takeSg, Request $request,UserRepository $userRepository, MailerInterface $mailer): Response
+{
+        return $this->redirectToRoute('sectionmail_pushSg',[
+              'reception' => 'sgIdLyon2'
+        ]); 
+}
+
+
+    /**
+     * 
+     * @Route("/pushSg{reception}", name="sectionmail_pushSg", methods={"GET","POST"})
      */
-    public function mailsg(Request $request,UserRepository $userRepository, MailerInterface $mailer): Response
+    public function pushSg(Request $request,UserRepository $userRepository, MailerInterface $mailer,$reception): Response
     {
+        $essaie=$reception;
         // chargement des donnée de service.yml
-        $userIdSg = $this->getParameter('sgId');
+        $userIdSg = $this->getParameter($essaie);
         $fpiMail = $this->getParameter('fpiMail');
 
         // affectation des données du secrétaire général.
         $sgUser= $userRepository->findOneByAdhesion($userIdSg);
         $sgAdhesion = $sgUser->getAdhesion();
+        $image = $sgAdhesion->getImage();
+        $imageId=$sgAdhesion->getImage() ? $sgAdhesion->getImage()->getId() : null;
+        if(!$imageId)
+        {
+            return $this->render('images/echec_vue_image.html.twig');
+                
+        }
+        $imageimagename = $image->getImageName();
         $sgFirstName= $sgAdhesion->getFirstName();
         $sgLastName= $sgAdhesion->getLastName();
         $sgMail= $sgAdhesion->getEmail();
@@ -50,16 +101,14 @@ class SectionmailController extends AbstractController
         // affectation des données de l'utilisateur.
         $user= $this->getUser();
         $adhesion=$user->getAdhesion();
+       
+           
         $userFirstName=$adhesion->getFirstName(); 
         $userLastName=$adhesion->getLastName(); 
         $userMail=$adhesion->getEmail(); 
-        $userGenre=$adhesion->getGender(); 
+        $userGender=$adhesion->getGender(); 
 
         $dateok=new \Datetime();
-
-        // test des resultats recherchés
-// var_dump($sgFirstName,$sgLastName,$sgMail);
-// var_dump($userFirstName,$userLastName,$userMail);
 
         $sectionmail = new Sectionmail();
 
@@ -67,15 +116,12 @@ class SectionmailController extends AbstractController
         $sectionmail->setUser1name($userFirstName);
         $sectionmail->setUser2name($userLastName);
         $sectionmail->setUser3mail($userMail);
-        $sectionmail->setGenre($userGenre);
+        $sectionmail->setGender($userGender);
         $sectionmail->setSg1name($sgFirstName);
         $sectionmail->setSg2name($sgLastName);
         $sectionmail->setSg3mail($sgMail);
         $sectionmail->setDateMail(new \DateTime('now'));
         
-
-
-
         $form = $this->createForm(SectionmailType::class, $sectionmail);
         $form->handleRequest($request);
 
@@ -86,20 +132,18 @@ class SectionmailController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($sectionmail);
             $entityManager->flush();
-//Envoi du Mail
+          
+            //Envoi du Mail
             $email = (new TemplatedEmail())
             ->from($fpiMail)
             ->to($sgMail)
-            ->subject('Test envoi mail aus SG fpi')
-            
+            ->subject('Message fpiinscription')
 
-        ->htmlTemplate('sectionmail/mailSg.html.twig')
-        ->context([
+            ->htmlTemplate('sectionmail/mailSg.html.twig')
+            ->context([
             'sectionmail' => $sectionmail,
-            // 'adhesionId' => $adhesionId,
-            // 'adhesionfirstname' => $adhesionfirstname
-        ]);
-        $mailer->send($email);
+             ]);
+             $mailer->send($email);
 
             return $this->redirectToRoute('home');
         }
@@ -107,7 +151,17 @@ class SectionmailController extends AbstractController
         return $this->render('sectionmail/envoiMailSg.html.twig', [
             'sectionmail' => $sectionmail,
             'form' => $form->createView(),
+            'im' => $imageimagename,
+            
         ]);
+        //  $reception = $request->query->get('reception');
+        // $reception = 'qui';
+        // return $this->render('veriftexte/indexyes.html.twig',[
+        //     'reception' => 'on attend', 
+        //     // 'reception' => $reception, 
+        //          'num' => 123,
+        // ]); 
+
     }
 
 
@@ -136,6 +190,7 @@ class SectionmailController extends AbstractController
     }
 
     /**
+     * @ParamConverter()
      * @Route("/{id}", name="sectionmail_show", methods={"GET"})
      */
     public function show(Sectionmail $sectionmail): Response

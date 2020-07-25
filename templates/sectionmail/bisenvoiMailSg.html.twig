@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Sectionmail{% endblock %}
+
+{% block body %}     
+<div class="well">
+
+
+<p>Envoyé un mail au bureau de la section<p>
+    
+    {{ include('sectionmail/_form.html.twig') }}
+</div>
+{% endblock %}

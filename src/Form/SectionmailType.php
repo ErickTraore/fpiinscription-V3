@@ -30,10 +30,9 @@ class SectionmailType extends AbstractType
             //     'widget' => 'single_text',
                 
             // ])
-            ->add('genre', HiddenType::class)
-            // ->add('save', SubmitType :: class , [
-            //     'label' => 'Enregistrer',
-            // ])
+            ->add('gender', HiddenType::class , [
+                'data' => 'abcdef'
+            ])
             ->add('Annuler', SubmitType :: class , [
                 'label' => 'Annuler',
             ])

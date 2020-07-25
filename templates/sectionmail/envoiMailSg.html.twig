@@ -1,15 +1,13 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}New Sectionmail{% endblock %}
-
 {% block body %}
 <div class="well">
  <p> <h4>Secrétaire Général de Section:{{ sectionmail.sg1name}} {{sectionmail.sg2name}}</h4></p>
-        <div> <img src="{{ asset('assets/img/im_accueiljpeg.png') }}"  class= "img-fluid" alt= "Responsive image"></div> 
-<p>Envoyé un message au bureau de la section<p>
-    
+        {# <div> <img src="{{ asset('assets/img/im_accueiljpeg.png') }}"  class= "img-fluid" alt= "Responsive image"></div>  #}
+        <div> <img src="{{ asset('assets/images/' ~ im) }}"  class= "img-fluid" alt= "Responsive image"> </div> 
+    {# <img style="margin:15px" width="120" src="{{ asset('assets/images/' ~ im) }}"> #}
+<p>Envoyé un mail au bureau de la section<p>
     {{ include('sectionmail/_form.html.twig') }}
-
     {# <a href="{{ path('sectionmail_index') }}">back to list</a> #}
 </div>
 {% endblock %}
