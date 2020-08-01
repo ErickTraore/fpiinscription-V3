@@ -1,0 +1,66 @@
+
+<div class="container">
+
+
+{{ form_start(form_fpicount, {'attr' : {'novalidate':'novalidate'}}) }}
+
+{# {{ dump(count) }} #}
+
+<div class="form-group">
+{{ form_label(form_fpicount.ref) }}
+{{ form_widget(form_fpicount.ref, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.ref) }}
+</div>
+<div class="form-group">
+{{ form_label(form_fpicount.description) }}
+{{ form_widget(form_fpicount.description, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.description) }}
+</div>
+<div class="form-group">
+{{ form_label(form_fpicount.pUnHt) }}
+{{ form_widget(form_fpicount.pUnHt, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.pUnHt) }}
+</div>
+<div class="form-group">
+{{ form_label(form_fpicount.qte) }}
+{{ form_widget(form_fpicount.qte, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.qte) }}
+</div><div class="form-group">
+{{ form_label(form_fpicount.remise) }}
+{{ form_widget(form_fpicount.remise, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.remise) }}
+</div>
+<div class="form-group">
+{{ form_label(form_fpicount.prixTotHt) }}
+{{ form_widget(form_fpicount.prixTotHt, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.prixTotHt) }}
+</div>
+<div class="form-group">
+{{ form_label(form_fpicount.tva) }}
+{{ form_widget(form_fpicount.tva, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.tva) }}
+</div><div class="form-group">
+{{ form_label(form_fpicount.dateBill) }}
+{{ form_widget(form_fpicount.dateBill, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.dateBill) }}
+</div><div class="form-group">
+{{ form_label(form_fpicount.totalTtc) }}
+{{ form_widget(form_fpicount.totalTtc, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.totalTtc) }}
+</div><div class="form-group">
+{{ form_label(form_fpicount.totCumul) }}
+{{ form_widget(form_fpicount.totCumul, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.totCumul) }}
+</div><div class="form-group">
+{{ form_label(form_fpicount.dateCumul) }}
+{{ form_widget(form_fpicount.dateCumul, {'attr':{'class':'form-control'}}) }}
+{{ form_errors(form_fpicount.dateCumul) }}
+  </div>
+
+<button class="btn btn-success">{{ label | default('save') | trans }}</button>
+
+<div>
+{{ form_end(form_fpicount) }}
+</div>
+
+</div>

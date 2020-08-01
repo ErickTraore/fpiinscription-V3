@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fpicount index{% endblock %}
+
+{% block body %}
+    <h1>Fpicount Expert Comptable</h1>
+    <h3>Attention: les Sommes sont en centimes, donc 1€ = 100</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ref</th>
+                <th>Description</th>
+                <th>PUnHt</th>
+                <th>Qte</th>
+                <th>Remise</th>
+                <th>PUnHtRem</th>
+                <th>PrixTotHt</th>
+                <th>Tva</th>
+                <th>DateBill</th>
+                <th>TotalTtc</th>
+                <th>TotCumul</th>
+                <th>DateCumul</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fpicount in fpicounts %}
+            <tr>
+                <td>{{ fpicount.id }}</td>
+                <td>{{ fpicount.ref }}</td>
+                <td>{{ fpicount.description }}</td>
+                <td>{{ fpicount.pUnHt }}</td>
+                <td>{{ fpicount.qte }}</td>
+                <td>{{ fpicount.remise }}</td>
+                <td>{{ fpicount.pUnHtRem }}</td>
+                <td>{{ fpicount.prixTotHt }}</td>
+                <td>{{ fpicount.tva }}</td>
+                <td>{{ fpicount.dateBill ? fpicount.dateBill|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ fpicount.totalTtc }}</td>
+                <td>{{ fpicount.totCumul }}</td>
+                <td>{{ fpicount.dateCumul ? fpicount.dateCumul|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('fpicount_show', {'id': fpicount.id}) }}">show</a>
+                    <a href="{{ path('fpicount_edit', {'id': fpicount.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('fpicount_new') }}">Create new</a>
+{% endblock %}

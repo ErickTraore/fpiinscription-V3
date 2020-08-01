@@ -1,9 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Abonnement payé.{% endblock %}
+{% block title %}Carte payé.{% endblock %}
 
 {% block body %}
-    {# {{ dump(listfpicounts) }} #}
 
  <div class="well">
  <ul>
@@ -12,8 +11,8 @@
 				<h6>Représentation FPI-FRANCE</h6>        
 			</div>
 
-<caption class="well well-sm"><h3> Liste des Adhérents ayant payé un abonnement.</h3></caption>
-       <div> <p><h3> Cumul Total Adhésion abonnement:{{ total_somme/100 }}</h3></p></div>
+<caption class="well well-sm"><h3> Liste des Adhérents ayant payé une carte.</h3></caption>
+       <div> <p><h3> Cumul Total vente des cartes:{{ total_somme/100 }}</h3></p></div>
 
     <table>
     {% if listfpicounts %}

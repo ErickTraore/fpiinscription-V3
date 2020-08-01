@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Adhesion" table="adhesion">
+    <unique-constraints>
+      <unique-constraint name="UNIQ_C50CA65A3DA5256D" columns="image_id"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="gender" type="boolean" column="gender" nullable="false"/>
+    <field name="statut" type="string" column="statut" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="firstName" type="string" column="first_name" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lastName" type="string" column="last_name" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="lieuNaissance" type="string" column="lieu_naissance" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nationnalite" type="string" column="nationnalite" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="natureIdentite" type="string" column="nature_identite" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="numberIdentity" type="string" column="number_identity" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="voie" type="string" column="voie" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="novoie" type="string" column="novoie" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="nomvoie" type="string" column="nomvoie" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="ville" type="string" column="ville" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="pays" type="string" column="pays" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="codepostale" type="string" column="codepostale" length="5" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="email" type="string" column="email" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="profession" type="string" column="profession" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="birthday" type="date" column="birthday" nullable="true"/>
+    <field name="dateadhesion" type="datetime" column="dateadhesion" nullable="true"/>
+    <field name="dateecheancebis" type="datetime" column="dateecheancebis" nullable="true"/>
+    <many-to-one field="image" target-entity="Image" fetch="LAZY">
+      <join-columns>
+        <join-column name="image_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

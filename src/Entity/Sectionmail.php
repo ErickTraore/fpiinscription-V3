@@ -2,76 +2,91 @@
 
 namespace App\Entity;
 
-use App\Repository\SectionmailRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=SectionmailRepository::class)
+ * Sectionmail
+ *
+ * @ORM\Table(name="sectionmail")
+ * @ORM\Entity
  */
 class Sectionmail
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="user1name", type="string", length=255, nullable=false)
      */
     private $user1name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="user2name", type="string", length=255, nullable=false)
      */
     private $user2name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="user3mail", type="string", length=255, nullable=false)
      */
     private $user3mail;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="content", type="string", length=255, nullable=false)
      */
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="sg1name", type="string", length=255, nullable=false)
      */
     private $sg1name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="sg2name", type="string", length=255, nullable=false)
      */
     private $sg2name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="sg3mail", type="string", length=255, nullable=false)
      */
     private $sg3mail;
-  
+
     /**
-     * @ORM\Column(name="date_mail", type="datetime")
-     * @Assert\Type("\DateTimeInterface")
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_mail", type="datetime", nullable=false)
      */
     private $dateMail;
-    
+
     /**
-     * @ORM\Column(type="boolean")
+     * @var bool
+     *
+     * @ORM\Column(name="gender", type="boolean", nullable=false)
      */
     private $gender;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function construct()
-    {
-        $this->dateMail = new \DATETIME();
     }
 
     public function getUser1name(): ?string
@@ -181,4 +196,6 @@ class Sectionmail
 
         return $this;
     }
+
+
 }

@@ -1,70 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Count{% endblock %}
+{% block title %}fpicount{% endblock %}
 
 {% block body %}
-    <h1>Count</h1>
+    <h1>fpicount</h1>
 
     <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ count.id }}</td>
+                <td>{{ fpicount.id }}</td>
             </tr>
             <tr>
                 <th>Ref</th>
-                <td>{{ count.ref }}</td>
+                <td>{{ fpicount.ref }}</td>
             </tr>
             <tr>
                 <th>Description</th>
-                <td>{{ count.description }}</td>
+                <td>{{ fpicount.description }}</td>
             </tr>
             <tr>
                 <th>PUnHt</th>
-                <td>{{ count.pUnHt }}</td>
+                <td>{{ fpicount.pUnHt }}</td>
             </tr>
             <tr>
                 <th>Qte</th>
-                <td>{{ count.qte }}</td>
+                <td>{{ fpicount.qte }}</td>
             </tr>
             <tr>
                 <th>Remise</th>
-                <td>{{ count.remise }}</td>
+                <td>{{ fpicount.remise }}</td>
             </tr>
             <tr>
                 <th>PUnHtRem</th>
-                <td>{{ count.pUnHtRem }}</td>
+                <td>{{ fpicount.pUnHtRem }}</td>
             </tr>
             <tr>
                 <th>PrixTotHt</th>
-                <td>{{ count.prixTotHt }}</td>
+                <td>{{ fpicount.prixTotHt }}</td>
             </tr>
             <tr>
                 <th>Tva</th>
-                <td>{{ count.tva }}</td>
+                <td>{{ fpicount.tva }}</td>
             </tr>
             <tr>
                 <th>DateBill</th>
-                <td>{{ count.dateBill ? count.dateBill|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ fpicount.dateBill ? fpicount.dateBill|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>TotalTtc</th>
-                <td>{{ count.totalTtc }}</td>
+                <td>{{ fpicount.totalTtc }}</td>
             </tr>
             <tr>
                 <th>TotCumul</th>
-                <td>{{ count.totCumul }}</td>
+                <td>{{ fpicount.totCumul }}</td>
             </tr>
             <tr>
                 <th>DateCumul</th>
-                <td>{{ count.dateCumul ? count.dateCumul|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ fpicount.dateCumul ? fpicount.dateCumul|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('count_index') }}">back to list</a>
+    <a href="{{ path('fpicount_index') }}">back to list</a>
 
-    <a href="{{ path('count_edit', {'id': count.id}) }}">edit</a>
+    <a href="{{ path('fpicount_edit', {'id': fpicount.id}) }}">edit</a>
 
-    {{ include('count/_delete_form.html.twig') }}
+    {{ include('fpicount/_delete_form.html.twig') }}
 {% endblock %}

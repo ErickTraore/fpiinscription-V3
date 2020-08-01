@@ -1,22 +1,24 @@
-{# {{ form_start(form) }} 
+{% extends  'security1/layout.html.twig' %}
+        {% block body %}
+
+        {# {{ form_start(form) }} 
     {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }} #}
 
 
-{% extends  'security1/layout.html.twig' %}
-        {% block body %}
-        {# <div class="alert alert-danger" role="alert">
+
+        <div class="alert alert-danger" role="alert">
 Procédure d'enregistrement d'identifiant.
 Votre identifiant doit impérativement correspondre à votre n° de téléphone internationnal
 .
  </div>  #}
- {# <div class="alert alert-success" role="alert">
+ <div class="alert alert-success" role="alert">
   <div>Exemple d'IDENTIFIANT avec le n° 07 03 04 05 67 (10 chiffres).</div>
   <div>1- suprimmez le premier chiffre qui est "0" cela fait: 7 03 04 05 67.</div>
   <div>2- Ajoutez l'indicatif internationnal france qui est 0033 cela fait: 00337 03 04 05 67.</div>  
   <div>3- Cet identifiant est donc: 0033703040567  (13 chiffres).</div>
-</div> #}
+</div>
 
             <div class="row">
                   <h3> INSCRIPTION </h3>

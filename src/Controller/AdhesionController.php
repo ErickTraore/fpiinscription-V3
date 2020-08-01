@@ -4,16 +4,20 @@ namespace App\Controller;
 // Danger: activation sms ligne 98 Empêche le deployement.
 
 use App\Controller\AdhesionController;
+use App\Controller\FpicountController;
+use App\Controller\ImageController;
+use App\Controller\UserController;
 use App\Entity\Adhesion;
-use App\Entity\Count;
+use App\Entity\Fpicount;
 use App\Entity\Image;
 use App\Entity\Upload;
 use App\Entity\User;
 use App\Form\AdhesionType;
-use App\Form\CountType;
+use App\Form\FpicountType;
 use App\Form\ImageType;
 use App\Form\UploadType;
 use App\Repository\AdhesionRepository;
+use App\Repository\FpicountRepository;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -188,9 +192,11 @@ class AdhesionController extends AbstractController
        */
       public function maj(Request $request, $adhesionId, $nbremois, $amountdeux):Response 
       {
+        $user = $this->getUser();
         $description = 'paiement en ligne';
         $ref = 'abonnement';
         $duree = $nbremois;
+        
         $repository = $this->getDoctrine()
                      ->getManager()
                      ->getRepository(Adhesion::class);
@@ -199,18 +205,16 @@ class AdhesionController extends AbstractController
         $dateDepart = $echeance;
         $dateDepart->modify('+'.$duree.'months');
         $adhesion->setDateecheancebis(new \DateTime($dateDepart->format('Y-m-d H:i:s.u')));
-
-        $count = new Count();
-            $count->setAdhesion($adhesion);
-        //    $form_count = $this->createForm(CountType::class, $count);
-            $count->setRef($ref);
-            $count->setDescription($description);
-        //   $form_count->handleRequest($request);
-            $count->setTotalTtc($amountdeux);
-            $count->setDate_Echeance(new \DateTime($dateDepart->format('Y-m-d H:i:s.u')));
+        $fpicount = new Fpicount();
+        $fpicount->setAdhesion($adhesion);
+        $fpicount->setUser($user);
+            $fpicount->setRef($ref);
+            $fpicount->setDescription($description);
+            $fpicount->setTotalTtc($amountdeux);
+            $fpicount->setDate_Echeance(new \DateTime($dateDepart->format('Y-m-d H:i:s.u')));
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($count);
+        $em->persist($fpicount);
         $em->flush();
         if (! $adhesion) 
         {
@@ -234,17 +238,17 @@ class AdhesionController extends AbstractController
         $ref = 'don';
             $user = $this->getUser();
             $adhesion = $user->getAdhesion();
-        $count = new Count();
-            $count->setAdhesion($adhesion);
-        //    $form_count = $this->createForm(CountType::class, $count);
-            $count->setRef($ref);
-            $count->setDescription($description);
-        //   $form_count->handleRequest($request);
-            $count->setTotalTtc($amountdeux);
-        //  $count->setDate_Echeance(new \DateTime($dateDepart->format('Y-m-d H:i:s.u')));
+        $fpicount = new Fpicount();
+            $fpicount->setAdhesion($adhesion);
+        //    $form_fpicount = $this->createForm(FpicountType::class, $fpicount);
+            $fpicount->setRef($ref);
+            $fpicount->setDescription($description);
+        //   $form_fpicount->handleRequest($request);
+            $fpicount->setTotalTtc($amountdeux);
+        //  $fpicount->setDate_Echeance(new \DateTime($dateDepart->format('Y-m-d H:i:s.u')));
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($count);
+        $em->persist($fpicount);
         $em->flush();
         if (! $adhesion) 
         {
@@ -267,14 +271,14 @@ class AdhesionController extends AbstractController
         $ref = 'inondation';
             $user = $this->getUser();
             $adhesion = $user->getAdhesion();
-        $count = new Count();
-            $count->setAdhesion($adhesion);
-        //    $form_count = $this->createForm(CountType::class, $count);
-            $count->setRef($ref);
-            $count->setDescription($description);
-        //   $form_count->handleRequest($request);
-            $count->setTotalTtc($amountdeux);
-        //  $count->setDate_Echeance(new \DateTime($dateDepart->format('Y-m-d H:i:s.u')));
+        $fpicount = new Fpicount();
+            $fpicount->setAdhesion($adhesion);
+        //    $form_fpicount = $this->createForm(FpicountType::class, $fpicount);
+            $fpicount->setRef($ref);
+            $fpicount->setDescription($description);
+        //   $form_fpicount->handleRequest($request);
+            $fpicount->setTotalTtc($amountdeux);
+        //  $fpicount->setDate_Echeance(new \DateTime($dateDepart->format('Y-m-d H:i:s.u')));
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($count);
@@ -296,27 +300,25 @@ class AdhesionController extends AbstractController
        */
       public function maj_carte(Request $request, $adhesionId, $amountdeux, $ref):Response 
       {
+        $user = $this->getUser();
         $description = 'paiement en ligne';
-        // $ref = 'don';
-            $user = $this->getUser();
-            $adhesion = $user->getAdhesion();
-        $count = new Count();
-            $count->setAdhesion($adhesion);
-        //    $form_count = $this->createForm(CountType::class, $count);
-            $count->setRef($ref);
-            $count->setDescription($description);
-        //   $form_count->handleRequest($request);
-            $count->setTotalTtc($amountdeux);
-        //  $count->setDate_Echeance(new \DateTime($dateDepart->format('Y-m-d H:i:s.u')));
+        $ref = 'carte_2020';
+        $adhesion = $user->getAdhesion();
+        $fpicount = new Fpicount();
+        $fpicount->setAdhesion($adhesion);
+        $fpicount->setUser($user);
+        $fpicount->setRef($ref);
+        $fpicount->setDescription($description);
+        $fpicount->setTotalTtc($amountdeux);
+        
 
         $em = $this->getDoctrine()->getManager();
-        $em->persist($count);
+        $em->persist($fpicount);
         $em->flush();
         if (! $adhesion) 
         {
             return new Response('cette opération de paiement a réussie mais echec des données');
         } 
-           // return new Response('cette maj don échéance a bien réussie');
             return $this->redirectToRoute('home');
       }
 

@@ -3,11 +3,12 @@
 namespace App\Controller;
 
 use App\Controller\AdhesionController;
-use App\Controller\CountController;
+use App\Controller\FpicountController;
 use App\Controller\ObjectManager;
 use App\Entity\Adhesion;
-use App\Form\CountType;
-use App\Repository\CountRepository;
+use App\Entity\Fpicount;
+use App\Form\FpicountType;
+use App\Repository\FpicountRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,15 +53,16 @@ class MailerController extends AbstractController
      /**
      * @Route("/sendattestation", name="sendmail_sendattestation")
      */
-    public function sendattestation(MailerInterface $mailer, CountRepository $countRepository):Response
+    public function sendattestation(MailerInterface $mailer, FpicountRepository $fpicountRepository):Response
     {
         $user = $this->getUser();
         $adhesion = $user->getAdhesion();
         $adhesionId = $adhesion->getId();
         $adhesionfirstname = $adhesion->getFirstName();
         $adhesionemail = $adhesion->getEmail();
-        $counts = $countRepository->findBy(
-            array('adhesion' => $adhesionId) // Critere 
+        $fpicounts = $fpicountRepository->findBy(array(
+         'adhesion' => $adhesionId
+        ) // Critere 
         );
        
         $email = (new TemplatedEmail())
@@ -70,14 +72,14 @@ class MailerController extends AbstractController
             
            
    // path of the Twig template to render
-        ->htmlTemplate('count/attestationMail.html.twig')
+        ->htmlTemplate('fpicount/attestationMail.html.twig')
         ->context([
-            'counts' => $counts,
+            'fpicounts' => $fpicounts,
             'adhesionId' => $adhesionId,
             'adhesionfirstname' => $adhesionfirstname
         ]);
         $mailer->send($email);
-        return $this->redirectToRoute('count_attestation');
+        return $this->redirectToRoute('fpicount_attestation');
     }
     //    /**
     //  * @Route("/sgemail/{sgmessage}", name="sendmail_sgemail")

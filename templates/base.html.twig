@@ -9,6 +9,7 @@
         {% block stylesheets %}
         {# On charge le CSS de bootstrap depuis le site directement #}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="{{ asset('/assets/images/ ~ user.adhesion.image') }}">
         <link href="{{ asset('assets/css/bootstrap.css') }}" rel="stylesheet">
         <link href="{{ asset('assets/css/tuto.css') }}" type="text/css" rel="stylesheet">
         <link href="{{ asset('assets/css/stripeElement.css') }}" type="text/css" rel="stylesheet">

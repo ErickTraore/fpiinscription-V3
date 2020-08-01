@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Abonnement payé.{% endblock %}
+{% block title %}Carte et Abon payé.{% endblock %}
 
 {% block body %}
     {# {{ dump(listfpicounts) }} #}
@@ -12,8 +12,8 @@
 				<h6>Représentation FPI-FRANCE</h6>        
 			</div>
 
-<caption class="well well-sm"><h3> Liste des Adhérents ayant payé un abonnement.</h3></caption>
-       <div> <p><h3> Cumul Total Adhésion abonnement:{{ total_somme/100 }}</h3></p></div>
+<caption class="well well-sm"><h3> Liste des Adhérents ayant effectué un paiement.</h3></caption>
+<caption class="well well-sm"><h4> Cumul Total Adhésion abonnement + vente de carte + Autre :{{ total_somme/100 }}</h4></caption>
 
     <table>
     {% if listfpicounts %}
@@ -32,11 +32,11 @@
                 <td class="well well-sm">{{ fpicount.user.adhesion.lastname  | default("") }}</td>
                 <td class="well well-sm">{{ fpicount.totalTtc/100  | default("") }}</td>
                 <td class="well well-sm">{{ fpicount.dateBill  | default("") | date('d-m-Y')  }}</td>
-                <td class="well well-sm">{{ fpicount.ref  | default("") }}</td>
+                <td class="well well-sm">{{  fpicount.ref  | default("") }}</td>
                     </tr>
          {% endfor %}
     {% else %}
-   Aucun Abonnement d'adherents.
+   Aucun paiement d'adhérent.
 {% endif %}
     </table>  
 </u>

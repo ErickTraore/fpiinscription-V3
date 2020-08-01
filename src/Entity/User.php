@@ -5,8 +5,10 @@
 
 namespace App\Entity;
 
-use App\Entity\Adhesion;
 use App\Controller\TestezController;
+use App\Entity\Adhesion;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -86,6 +88,11 @@ class User implements UserInterface
     private $signature;
 
     /**
+     * @ORM\OneToMany(targetEntity=Fpicount::class, mappedBy="user")
+     */
+    private $fpicounts;
+
+    /**
      *  @return mixed
      */
     public function getId()
@@ -98,6 +105,7 @@ class User implements UserInterface
         
         $this->roles = array('ROLE_SYMPATHISANT');
         $this->date_crea = new \Datetime();
+        $this->fpicounts = new ArrayCollection();
 
     }
 
@@ -195,7 +203,7 @@ class User implements UserInterface
     * @return string
     */
     public function __toString(){
-        return $this->getUsername();
+        return $this;
     }
 
     public function setRoles(array $roles): self
@@ -230,6 +238,37 @@ class User implements UserInterface
     public function setSignature(string $signature): self
     {
         $this->signature = $signature;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Fpicount[]
+     */
+    public function getFpicounts(): Collection
+    {
+        return $this->fpicounts;
+    }
+
+    public function addFpicount(Fpicount $fpicount): self
+    {
+        if (!$this->fpicounts->contains($fpicount)) {
+            $this->fpicounts[] = $fpicount;
+            $fpicount->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFpicount(Fpicount $fpicount): self
+    {
+        if ($this->fpicounts->contains($fpicount)) {
+            $this->fpicounts->removeElement($fpicount);
+            // set the owning side to null (unless already changed)
+            if ($fpicount->getUser() === $this) {
+                $fpicount->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -149,7 +149,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
              \Stripe\Stripe::setApiKey($this->getParameter('sk_live'));
                 $token = $_POST['stripeToken'];
                 $amountdeux = $_POST['amountrois'];
-                // $nbremois = ($amountdeux / 500);
                 $charge = \Stripe\Charge::create([
             'amount' => $amountdeux,
             'currency' => 'eur',

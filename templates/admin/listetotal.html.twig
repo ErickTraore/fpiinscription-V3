@@ -52,7 +52,11 @@
                 <td class="well well-sm">{{ user.adhesion.ville  | default("") }}</td>
                 <td class="well well-sm">{{ user.adhesion.pays  | default("") }}</td>
                 <td class="well well-sm">{{ user.adhesion.codepostale  | default("") }}</td>
+                <td class="well well-sm">{{ user.adhesion.image.id | default("") }}</td>
                 <td> <img style="margin:15px" width="120" src='{{ asset('assets/images/' ~ user.adhesion.image | default("")) }}'></td>
+
+                {# <td> <img style="margin:15px" width="120" src='{{ asset('/assets/images/' ~ user.adhesion.image | default("")) }}'></td> #}
+                {# <td> <img style="margin:15px" width="120" src='{{ asset('/assets/images/' ~ user.adhesion.image | default("")) }}'></td> #}
          </tr>
          {% endfor %}
     {% else %}

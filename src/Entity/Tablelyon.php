@@ -5,44 +5,61 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\TablelyonRepository")
+ * Tablelyon
+ *
+ * @ORM\Table(name="tablelyon")
+ * @ORM\Entity
  */
 class Tablelyon
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="username", type="string", length=255, nullable=true)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="roles", type="string", length=255, nullable=true)
      */
     private $roles;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @var string|null
+     *
+     * @ORM\Column(name="titre", type="text", length=0, nullable=true)
      */
     private $titre;
 
@@ -122,4 +139,6 @@ class Tablelyon
 
         return $this;
     }
+
+
 }

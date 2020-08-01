@@ -2,12 +2,16 @@
 
 namespace App\Form;
 
-use App\Entity\Count;
+use App\Entity\Fpicount;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CountType extends AbstractType
+class FpicountType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,8 +26,14 @@ class CountType extends AbstractType
             ->add('tva')
             ->add('dateBill')
             ->add('totalTtc')
-            ->add('totCumul')
-            ->add('dateCumul')
+            ->add('totCumul', NumberType::class)
+            ->add('dateCumul', DateTimeType::class, [
+                'placeholder' => [
+                    'year' => 'Year', 'month' => 'Month', 'day' => 'Day',
+                    'hour' => 'Hour', 'minute' => 'Minute', 'second' => 'Second',
+                ]
+            ])
+            ->add('dateEcheance')
             ->add('Annuler', SubmitType::class, ['label' => 'Annuler'])
         ;
     }
@@ -31,7 +41,7 @@ class CountType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Count::class,
+            'data_class' => Fpicount::class,
         ]);
     }
 }

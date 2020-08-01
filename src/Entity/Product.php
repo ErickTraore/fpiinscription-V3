@@ -6,60 +6,72 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Product
- * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ *
+ * @ORM\Table(name="product")
+ * @ORM\Entity
  */
 class Product
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="brochure_filename", type="string", length=255, nullable=false)
      */
     private $brochureFilename;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="titre", type="string", length=255, nullable=false)
      */
     private $titre;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @var string
+     *
+     * @ORM\Column(name="ref", type="string", length=255, nullable=false)
      */
     private $ref;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime|null
+     *
+     * @ORM\Column(name="date_doc", type="datetime", nullable=true)
      */
-    private $date_doc;
+    private $dateDoc;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getBrochureFilename()
+    public function getBrochureFilename(): ?string
     {
         return $this->brochureFilename;
     }
 
-    public function setBrochureFilename($brochureFilename)
+    public function setBrochureFilename(string $brochureFilename): self
     {
         $this->brochureFilename = $brochureFilename;
 
         return $this;
     }
 
-    public function getTitre()
+    public function getTitre(): ?string
     {
         return $this->titre;
     }
 
-    public function setTitre($titre)
+    public function setTitre(string $titre): self
     {
         $this->titre = $titre;
 
@@ -80,13 +92,15 @@ class Product
 
     public function getDateDoc(): ?\DateTimeInterface
     {
-        return $this->date_doc;
+        return $this->dateDoc;
     }
 
-    public function setDateDoc(?\DateTimeInterface $date_doc)
+    public function setDateDoc(?\DateTimeInterface $dateDoc): self
     {
-        $this->date_doc = $date_doc;
+        $this->dateDoc = $dateDoc;
 
         return $this;
     }
+
+
 }

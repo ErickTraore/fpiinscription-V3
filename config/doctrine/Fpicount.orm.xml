@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="App\Entity\Fpicount" table="fpicount">
+    <indexes>
+      <index name="IDX_F3CE4B93A76ED395" columns="user_id"/>
+      <index name="IDX_F3CE4B93F68139D7" columns="adhesion_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="ref" type="string" column="ref" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="description" type="string" column="description" length="255" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="pUnHt" type="float" column="p_un_ht" precision="10" scale="0" nullable="true"/>
+    <field name="qte" type="integer" column="qte" nullable="true">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <field name="remise" type="float" column="remise" precision="10" scale="0" nullable="true"/>
+    <field name="pUnHtRem" type="float" column="p_un_ht_rem" precision="10" scale="0" nullable="true"/>
+    <field name="prixTotHt" type="float" column="prix_tot_ht" precision="10" scale="0" nullable="true"/>
+    <field name="tva" type="float" column="tva" precision="10" scale="0" nullable="true"/>
+    <field name="dateBill" type="datetime" column="date_bill" nullable="true"/>
+    <field name="totalTtc" type="float" column="total_ttc" precision="10" scale="0" nullable="true"/>
+    <field name="totCumul" type="float" column="tot_cumul" precision="10" scale="0" nullable="true"/>
+    <field name="dateCumul" type="datetime" column="date_cumul" nullable="true"/>
+    <field name="dateEcheance" type="datetime" column="date_echeance" nullable="true"/>
+    <many-to-one field="user" target-entity="User" fetch="LAZY">
+      <join-columns>
+        <join-column name="user_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="adhesion" target-entity="Adhesion" fetch="LAZY">
+      <join-columns>
+        <join-column name="adhesion_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -9,6 +9,7 @@ parameters:
     fpiMail: 'fpiinscription@gmail.com'
     image_directory: '../public/assets/images'
     brochures_directory: '../public/assets/brochures'
+    # sk_live: 'sk_test_NAzldBsleRwMMbtOKprXgq3R'
     sk_live: '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'
     apiKey: 'ZGFvdWRhOiQyeSQxMCRneVdNTWhZT3dpYTdhb0NNLlI2blAuSkRMY2ZNSmRsbGZ4OS5yUHdGU1NOaC52Mk9OcURhUw=='
 

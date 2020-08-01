@@ -3,12 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Adhesion; 
-use App\Entity\Count; 
+use App\Entity\Fpicount; 
 use App\Entity\Image;
 use App\Entity\User;
+use App\Form\ImageType;
 use App\Form\User1Type;
 use App\Repository\AdhesionRepository;
-use App\Repository\CountRepository;
+use App\Repository\FpicountRepository;
 use App\Repository\ImageRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -32,32 +33,35 @@ class AdminController extends AbstractController
     /**
     * @Route("/commandecarte", name="admin_commandecarte")
     */
-    public function commandecarte(CountRepository $countRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $mageRepository):Response
+    public function commandecarte(FpicountRepository $fpicountRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $imageRepository):Response
     {
-        $counts = $countRepository->findBy([
+        $fpicounts = $fpicountRepository->findBy([
             'ref' => 'carte_2020'
         ]);
         $listusers[]='';
 
-        foreach ($counts as $count) {
-            $adhesion = $count->getAdhesion();
+        foreach ($fpicounts as $fpicount) {
+            $adhesion = $fpicount->getAdhesion();
             $adhesionid = $adhesion->getId();
             $image = $adhesion->getImage();
             $listusers[]=$userRepository->findOneBy(['adhesion' => $adhesionid]);
         }
+        
         return $this->render('admin/commandecarte.html.twig', [
                 'listusers' => $listusers,
-                'counts' => $counts
+                'counts' => $fpicounts
                 ]);
     }
         
     /**
      * @Route("/listetotal", name="admin_listetotal")
      */
-    public function listetotal(CountRepository $countRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $mageRepository):Response
+    public function listetotal(FpicountRepository $fpicountRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $imageRepository):Response
     {
         $users = $userRepository->findAll();
         $adhesions = $adhesionRepository->findAll();
+        // $images = $imageRepository->findAll();
+       
         // $listusers[]='';
         
         // foreach ($users as $user) {
@@ -73,12 +77,12 @@ class AdminController extends AbstractController
     /**
      * @Route("/listeadherent", name="admin_listeadherent")
      */
-    public function listeadherent(AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $mageRepository):Response
+    public function listeadherent(AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $imageRepository):Response
     {
         // $user = new User();
         $users = $userRepository->findAll();
         $adhesions = $adhesionRepository->findAll();
-        // $listusers[]='';
+        $listusers[]='';
         // foreach ($users as $user) {
         //     $adhesion = $user->getAdhesion();
         //     $role = $user->getRoles();
@@ -94,7 +98,7 @@ class AdminController extends AbstractController
     /**
      * @Route("/listeadmin", name="admin_listeadmin")
      */
-    public function listeadmin(CountRepository $countRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $mageRepository):Response
+    public function listeadmin(FpicountRepository $fpicountRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $imageRepository):Response
     {
         $user = new User();
         $users = $userRepository->findAll();
@@ -116,17 +120,11 @@ class AdminController extends AbstractController
        /**
      * @Route("/listesuperadmin", name="admin_listesuperadmin")
      */
-    public function listesuperadmin(AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $mageRepository):Response
+    public function listesuperadmin(AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $imageRepository):Response
     {
         $user = new User();
         $users = $userRepository->findAll();
         $adhesions = $adhesionRepository->findAll();
-        // $listusers[]='';
-        // foreach ($users as $user) {
-        //     $adhesion = $user->getAdhesion();
-        //     $role = $user->getRoles();
-        //     $listusers[]=$user;
-        // }
         return $this->render('admin/listesuperadmin.html.twig', [
             'listusers' => $users,
             // 'listusers' => $listusers,
@@ -137,84 +135,111 @@ class AdminController extends AbstractController
     /**
      * @Route("/paiementadherent", name="admin_paiementadherent")
      */
-    public function paiementadherent(CountRepository $countRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository):Response
+    public function paiementadherent(FpicountRepository $fpicountRepository, UserRepository $userRepository):Response
     {
-        $users = $userRepository->findAll();
-        $counts = $countRepository->findBy([
+        $fpicounts = $fpicountRepository->findBy([
             'ref' => 'abonnement'
         ]);
-        $listusers[]='';
-
-        foreach ($counts as $count) {
-            
-            $adhesion = $count->getAdhesion();
-            $adhesionid = $adhesion->getId();
-            $user = $userRepository->findOneBy(['adhesion' => $adhesionid]);
-            $adhesion = $user->getAdhesion();
-            $listusers[]=$userRepository->findOneBy(['adhesion' => $adhesionid]);
-            $listcounts[]=$countRepository->findOneBy(['adhesion' => $adhesionid]);
+             $listusers[]='';
+             $total_somme=0;
+         foreach ($fpicounts as $fpicount) {
+             $adhesion = $fpicount->getAdhesion();
+             $user = $fpicount->getUser();
+             $total_somme = $total_somme + $fpicount->getTotalTtc();
+             $listfpicounts[]= $fpicount;
          }
-
-        
-           
-            // $counts = $countRepository->findAll();
-            // $users = $userRepository->findAll();
-            // $adhesions = $adhesionRepository->findAll();
-
-            dump($listusers);
-            dump($listcounts);
-
-
-        
         return $this->render('admin/paiementadherent.html.twig', [
-                'listusers' => $listusers,
-                // 'counts' => $counts,
-                // 'users' =>$users,
-                // 'adhesions' =>$adhesions,
+                // 'listusers' => $listusers,
+                'listfpicounts' => $listfpicounts,
+                'total_somme'=> $total_somme
+                ]);
+    }
+    
+           /**
+     * @Route("/paiementcarteabon", name="admin_paiementcarteabon")
+     */
+    public function paiementcarteabon(FpicountRepository $fpicountRepository):Response
+    {
+        $fpicounts = $fpicountRepository->findAll();
+             $listusers[]='';
+             $total_somme=0;
+         foreach ($fpicounts as $fpicount) {
+             $adhesion = $fpicount->getAdhesion();
+             $user = $fpicount->getUser();
+             $total_somme = $total_somme + $fpicount->getTotalTtc();
+             $listfpicounts[]= $fpicount;
+         }
+        return $this->render('admin/paiementcarteabon.html.twig', [
+                // 'listusers' => $listusers,
+                'listfpicounts' => $listfpicounts,
+                'total_somme'=> $total_somme
+                ]);
+    }
+
+    /**
+     * @Route("/paiementcarte", name="admin_paiementcarte")
+     */
+    public function paiementcarte(FpicountRepository $fpicountRepository):Response
+    {
+        $fpicounts = $fpicountRepository->findBy([
+            'ref' => 'carte_2020'
+        ]);
+             $listusers[]='';
+             $total_somme=0;
+         foreach ($fpicounts as $fpicount) {
+             $adhesion = $fpicount->getAdhesion();
+             $user = $fpicount->getUser();
+             $total_somme = $total_somme + $fpicount->getTotalTtc();
+             $listfpicounts[]= $fpicount;
+         }
+        return $this->render('admin/paiementcarte.html.twig', [
+                // 'listusers' => $listusers,
+                'listfpicounts' => $listfpicounts,
+                'total_somme'=> $total_somme
                 ]);
     }
 
     /**
      * @Route("/paiementdon", name="admin_paiementdon")
      */
-    public function paiementdon(CountRepository $countRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $mageRepository):Response
+    public function paiementdon(FpicountRepository $fpicountRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $imageRepository):Response
     {
-        $counts = $countRepository->findBy([
+        $fpicounts = $fpicountRepository->findBy([
             'ref' => 'don'
         ]);
         $listusers[]='';
 
-        foreach ($counts as $count) {
-            $adhesion = $count->getAdhesion();
+        foreach ($fpicounts as $fpicount) {
+            $adhesion = $fpicount->getAdhesion();
             $adhesionid = $adhesion->getId();
             $image = $adhesion->getImage();
             $listusers[]=$userRepository->findOneBy(['adhesion' => $adhesionid]);
         }
         return $this->render('admin/paiementdon.html.twig', [
                 'listusers' => $listusers,
-                'counts' => $counts
+                'counts' => $fpicounts
                 ]);
     }
 
     /**
      * @Route("/paiementvente", name="admin_paiementvente")
      */
-    public function paiementvente(CountRepository $countRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $mageRepository):Response
+    public function paiementvente(FpicountRepository $fpicountRepository, AdhesionRepository $adhesionRepository, UserRepository $userRepository, ImageRepository $imageRepository):Response
     {
-        $counts = $countRepository->findBy([
+        $fpicounts = $fpicountRepository->findBy([
             'ref' => 'vente'
         ]);
         $listusers[]='';
 
-        foreach ($counts as $count) {
-            $adhesion = $count->getAdhesion();
+        foreach ($fpicounts as $fpicount) {
+            $adhesion = $fpicount->getAdhesion();
             $adhesionid = $adhesion->getId();
             $image = $adhesion->getImage();
             $listusers[]=$userRepository->findOneBy(['adhesion' => $adhesionid]);
         }
         return $this->render('admin/paiementvente.html.twig', [
                 'listusers' => $listusers,
-                'counts' => $counts
+                'counts' => $fpicounts
                 ]);
     }
 

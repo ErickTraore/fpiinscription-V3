@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit fpicount{% endblock %}
+
+{% block body %}
+    <h1>Edit fpicount</h1>
+
+    {{ include('fpicount/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('fpicount_index') }}">back to list</a>
+
+    {{ include('fpicount/_delete_form.html.twig') }}
+{% endblock %}

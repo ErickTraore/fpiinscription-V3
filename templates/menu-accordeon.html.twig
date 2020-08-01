@@ -47,7 +47,7 @@
          <li><a href="{{ path('cotisation_formCarte') }}">Paiement Carte Adhesion</a></li>
          <li><a href="{{ path('cotisation_formPaiement') }}">Mensuelle/annuel</a></li>
          <li><a href="{{ path('cotisation_formdon') }}">Dons</a></li>
-         <li><a href="{{ path('count_attestation') }}">Attestation de paiement</a></li>
+         <li><a href="{{ path('fpicount_attestation') }}">Attestation de paiement</a></li>
       </ul>
    </li>
          {% endif %}
@@ -68,7 +68,9 @@
          <li><a href="{{ path('admin_listeadherent') }}">Liste-Adherents</a></li>
          <li><a href="{{ path('admin_listeadmin') }}">Liste-Administrateurs</a></li>
          <li><a href="{{ path('admin_listesuperadmin') }}">Liste-Super_Admin</a></li>
-         <li><a href="{{ path('admin_paiementadherent') }}">Paiements adhesions</a></li>
+         <li><a href="{{ path('admin_paiementadherent') }}">Pay adhesions</a></li>
+         <li><a href="{{ path('admin_paiementcarte') }}">Pay cartes</a></li>
+         <li><a href="{{ path('admin_paiementcarteabon') }}">Pay cartes+abon</a></li>
          <li><a href="{{ path('admin_paiementdon') }}">Paiements dons</a></li>
          <li><a href="{{ path('admin_paiementvente') }}">Paiements ventes</a></li>{# <li><a href="{{ path('envoiesms_general') }}">Communications</a></li> #}
       </ul>
@@ -94,9 +96,18 @@
       
       {# {{ path('admin_majroles') }} #}
          <li><a href="{{ path('rolemodifun') }}">Modif roles</a></li>
+         <li><a href="{{ path('fpicount_index') }}">Controle-payment</a></li>
          <li><a href="{{ path('product_new') }}">Insertion Document</a></li>
          <li><a href="{{ path('envoiesms_lwssmssignature') }}">Test SMS LWS</a></li>
          <li><a href="{{ path('envoiesms_smspartnersignature') }}">Test smspartner</a></li>
+      </ul>
+   </li>
+      <li><a href="#">Journal Finance</a>  
+      <ul>
+         <li><a href="">Abonnement-2020</a></li>
+         <li><a href="">Carte-2020</a></li>
+         <li><a href="">Abon+Carte</a></li>
+
       </ul>
    </li>
 {% endif %}

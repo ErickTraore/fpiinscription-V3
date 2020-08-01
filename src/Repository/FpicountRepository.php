@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\Count;
+use App\Entity\Fpicount;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Count|null find($id, $lockMode = null, $lockVersion = null)
- * @method Count|null findOneBy(array $criteria, array $orderBy = null)
- * @method Count[]    findAll()
- * @method Count[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Fpicount|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Fpicount|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Fpicount[]    findAll()
+ * @method Fpicount[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CountRepository extends ServiceEntityRepository
+class FpicountRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Count::class);
+        parent::__construct($registry, Fpicount::class);
     }
 
     // /**
@@ -47,9 +47,9 @@ class CountRepository extends ServiceEntityRepository
     // }
 
     /**
-     * @return Count[] Returns an array of Count objects
+     * @return Fpicount[] Returns an array of Fpicount objects
      */
-    public function findByref($value): ?Count
+    public function findByref($value): ?Fpicount
     {
         return $this->createQueryBuilder('c')
             ->where('c.ref = :val')
